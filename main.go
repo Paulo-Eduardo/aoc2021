@@ -23,8 +23,12 @@ func ReadFile(name string) []string{
 func main() {
 	resultOne := handleOne()
 	resultTwo := handleTwo()
+	resutlTwoOne := handleTwoOne()
+	resutlTwoTwo := handleTwoTwo()
 	fmt.Println(resultOne)
 	fmt.Println(resultTwo)
+	fmt.Println(resutlTwoOne)
+	fmt.Println(resutlTwoTwo)
 }
 
 func handleOne() int {
@@ -76,3 +80,45 @@ func handleTwo() int {
 	return count
 }
 
+func handleTwoOne() int {
+	inputArr := ReadFile("input2_1.txt")
+
+	horizontalP, dethP := 0, 0
+
+	for _, item := range inputArr {
+		itemValues := strings.Split(item, " ")
+		itemQuantity, _ := strconv.Atoi(itemValues[1])
+		switch itemValues[0] {
+		case "forward":
+			horizontalP += itemQuantity
+		case "up":
+			dethP -= itemQuantity
+		case "down":
+			dethP += itemQuantity
+		}
+	}
+
+	return horizontalP * dethP
+}
+
+func handleTwoTwo() int {
+	inputArr := ReadFile("input2_1.txt")
+
+	horizontalP, dethP, aim := 0, 0, 0
+
+	for _, item := range inputArr {
+		itemValues := strings.Split(item, " ")
+		itemQuantity, _ := strconv.Atoi(itemValues[1])
+		switch itemValues[0] {
+		case "forward":
+			horizontalP += itemQuantity
+			dethP += itemQuantity * aim
+		case "up":
+			aim -= itemQuantity
+		case "down":
+			aim += itemQuantity
+		}
+	}
+
+	return horizontalP * dethP
+}
